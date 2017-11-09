@@ -1,0 +1,8 @@
+# ignore all directories
+*/
+
+# ignore all .bmp files
+*.bmp
+
+# ignore all .csv files
+*.csv
