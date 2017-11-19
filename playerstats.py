@@ -12,12 +12,12 @@ import pygame.font
 class Playerstats():
     """A class to report player stats."""
 
-    def __init__(self, bstats_settings, screen, playerdict):
+    def __init__(self, bstats_settings, screen, teams):
         """Initialize player statistic attributes."""
         self.screen = screen
         self.screen_rect = screen.get_rect()
         self.bstats_settings = bstats_settings
-        self.playerdict = playerdict
+        self.teams = teams
 
         # Font size for player stats
         self.font = pygame.font.SysFont("Courier", 14, bold=True)
@@ -68,61 +68,68 @@ class Playerstats():
         self.awaycount = 0
         self.count = 0
 
-        # In each player, prep each stats line, line-by-line
-        for player in self.playerdict.values():
+        for team in self.teams:
+            # In each player, prep each stats line, line-by-line
+            for player in sorted(team.teamlist, key=lambda
+                                 player: player.name):
 
-            # Stats buffer string; needs to be cleared for every player
-            self.stats_str = ''
+                # Stats buffer string; needs to be cleared for every player
+                self.stats_str = ''
 
-            # Player on home team ? prep values for home player then print
-            if player.team == 'Home':
+                # Player on home team ? prep values for home player then print
+                if player.team == 'Home':
 
-                # Parse playerstats list to get which values to print
-                # If value is player name, make player name at least 9 chars
-                for i, values in \
-                        enumerate(self.bstats_settings.get_playerdict(player)):
-                    self.stats_str += str(values)
-                    while i is 0 and (len(self.stats_str) < 9):
-                        self.stats_str += ' '
-                    self.stats_str += '  '            # spacing between fields
+                    # Parse playerstats list to get which values to print
+                    # If value is name, make name at least 9 chars
+                    for i, values in \
+                            enumerate(
+                                self.bstats_settings.get_playerdict(player)
+                            ):
+                        self.stats_str += str(values)
+                        while i is 0 and (len(self.stats_str) < 9):
+                            self.stats_str += ' '
+                        self.stats_str += '  '        # spacing between fields
 
-                self.homecount += 1
-                self.count = self.homecount
-                offsetx = 0
+                    self.homecount += 1
+                    self.count = self.homecount
+                    offsetx = 0
 
-                # render stats str into a font image with correct settings
-                self.stats_image = self.font.render(
-                    self.stats_str, True,
-                    self.bstats_settings.colorHome,
-                    self.bstats_settings.bg_color
-                )
-            elif player.team == 'Away':
+                    # render stats str into a font image with correct settings
+                    self.stats_image = self.font.render(
+                        self.stats_str, True,
+                        self.bstats_settings.colorHome,
+                        self.bstats_settings.bg_color
+                    )
 
-                # Parse playerstats list to get which values to print
-                # If value is player name, make player name at least 9 chars
-                for i, values in \
-                        enumerate(self.bstats_settings.get_playerdict(player)):
-                    self.stats_str += str(values)
-                    while i is 0 and (len(self.stats_str) < 9):
-                        self.stats_str += ' '
-                    self.stats_str += '  '            # spacing between fields
+                elif player.team == 'Away':
 
-                self.awaycount += 1
-                self.count = self.awaycount
-                offsetx = self.bstats_settings.screen_width / 2
+                    # Parse playerstats list to get which values to print
+                    # If value is name, make name at least 9 chars
+                    for i, values in \
+                            enumerate(
+                                self.bstats_settings.get_playerdict(player)
+                            ):
+                        self.stats_str += str(values)
+                        while i is 0 and (len(self.stats_str) < 9):
+                            self.stats_str += ' '
+                        self.stats_str += '  '        # spacing between fields
 
-                # render stats str into a font image with correct settings
-                self.stats_image = self.font.render(
-                    self.stats_str, True,
-                    self.bstats_settings.colorAway,
-                    self.bstats_settings.bg_color
-                )
+                    self.awaycount += 1
+                    self.count = self.awaycount
+                    offsetx = self.bstats_settings.screen_width / 2
 
-            # Display the stats on the mid left of the screen.
-            self.stats_rect = self.stats_image.get_rect()
-            self.stats_rect.midleft = self.screen_rect.left + offsetx,\
-                self.screen_rect.centery + 100 + self.count * 25
+                    # render stats str into a font image with correct settings
+                    self.stats_image = self.font.render(
+                        self.stats_str, True,
+                        self.bstats_settings.colorAway,
+                        self.bstats_settings.bg_color
+                    )
 
-            self.show_stats()
+                # Display the stats on the mid left of the screen.
+                self.stats_rect = self.stats_image.get_rect()
+                self.stats_rect.midleft = self.screen_rect.left + offsetx,\
+                    self.screen_rect.centery + 100 + self.count * 25
+
+                self.show_stats()
 
 #    def __get_stats_str(self, team):

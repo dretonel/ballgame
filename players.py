@@ -29,6 +29,8 @@ class Player(Stats):
             'fga',
             '3pt',
             '3pa',
+#            'ft',
+#            'fta',
             'ast',
             'orb',
             'drb',
@@ -92,6 +94,13 @@ class Player(Stats):
             self.threePp = self.threeP / self.threePa
         else:
             self.threePp = 0.000
+
+    def ft_made(self, edit_flag):
+        """Change stats on a ft made"""
+        self.ft += 1 - (2 * int(edit_flag))
+        self.fta += 1 - (2 * int(edit_flag))
+
+        self.pts += 1 - (2 * int(edit_flag))
 
     def update_rb(self):
         """Update the total rebound stat"""

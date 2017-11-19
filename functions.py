@@ -3,8 +3,9 @@ import re
 import pygame
 
 import csv_func
-#import bstats_lines
+# import bstats_lines
 from button import Button
+
 
 def check_keydown_events(event, stats):
     """Respond to keypresses"""
@@ -12,21 +13,24 @@ def check_keydown_events(event, stats):
         stats.reset_stats()
     elif event.key == pygame.K_e:
         stats.edit_stats()
-    #elif event.key == pygame.K_LEFT:
+    # elif event.key == pygame.K_LEFT:
         # something2
+
 
 def check_keyup_events(event, stats):
     """Respond to key releases"""
-    #if event.key == pygame.K_RIGHT:
+    # if event.key == pygame.K_RIGHT:
         # false something1
-    #elif event.key == pygame.K_LEFT:
+    # elif event.key == pygame.K_LEFT:
         # false something2
+
 
 def check_play_button(stats, play_button, mouse_x, mouse_y):
     """Start a new game when the user clicks Play."""
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked and not stats.game_active:
         stats.game_active = True
+
 
 def check_player_buttons(stats, buttons, playerdict, mouse_x, mouse_y):
     """Check fg button presses and add stat to player."""
@@ -59,6 +63,20 @@ def check_player_buttons(stats, buttons, playerdict, mouse_x, mouse_y):
                 for person in playerdict.values():
                     if re.match(person.name, key) and button_clicked:
                         person.threeP_att(stats.edit_flag)
+                        stats.stat_change = True
+                        break
+
+            if '_ft' in key and "fta" not in key:
+                for person in playerdict.values():
+                    if re.match(person.name, key) and button_clicked:
+                        person.ft_made(stats.edit_flag)
+                        stats.stat_change = True
+                        break
+
+            if '_fta' in key:
+                for person in playerdict.values():
+                    if re.match(person.name, key) and button_clicked:
+                        person.fta += 1 - (2 * int(stats.edit_flag))
                         stats.stat_change = True
                         break
 
@@ -113,14 +131,41 @@ def check_player_buttons(stats, buttons, playerdict, mouse_x, mouse_y):
                         stats.stat_change = True
                         break
 
+
+def make_stats_buttons(bstats_settings, teams, screen):
+    """Make the stats buttons for players and return dict, buttons"""
+    buttons = {}
+
+    # Variables for building buttons
+    homecount = 0
+    awaycount = 0
+
+    for team in teams:
+        for player in sorted(team.teamlist, key=lambda player: player.name):
+            if player.team =='Away':
+                offset = bstats_settings.screen_width / 2
+                awaycount += 1
+                i = awaycount
+            elif team.team == 'Home':
+                offset = 0
+                homecount += 1
+                i = homecount
+
+            for index, msg in enumerate(player.stats):
+                buttons[player.name + '_' + msg] = \
+                    Button(bstats_settings, screen, msg, index, i, offset)
+
+    return buttons
+
+
 def check_events(stats, buttons, playerdict, play_button, bstats_settings,
-    teams):
+                 teams):
     """Respond to keypresses and mouse events."""
     for event in pygame.event.get():
 
         # Event is Quit ? write CSV then close program
         if event.type == pygame.QUIT:
-            csv_func.write_CSV(playerdict, bstats_settings, teams)
+            csv_func.write_CSV(bstats_settings, teams)
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             check_keydown_events(event, stats)
@@ -129,37 +174,12 @@ def check_events(stats, buttons, playerdict, play_button, bstats_settings,
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
             check_play_button(stats, play_button, mouse_x, mouse_y)
-            check_player_buttons(stats, buttons, playerdict,\
-                mouse_x, mouse_y)
+            check_player_buttons(stats, buttons, playerdict,
+                                 mouse_x, mouse_y)
 
-def make_stats_buttons(bstats_settings, playerdict, screen):
-    """Make the stats buttons for players and return dict, buttons"""
-    buttons = {}
 
-    # Variables for building buttons
-    homecount = 0
-    awaycount = 0
-    i = 0
-
-    # Go through player dict, making buttons
-    # buttons have format "Name_pts"
-    for player in playerdict.values():
-        if player.team == 'Away':
-            offset = bstats_settings.screen_width / 2
-            awaycount += 1
-            i = awaycount
-        elif player.team == 'Home':
-            offset = 0
-            homecount += 1
-            i = homecount
-        for index, msg in enumerate(player.stats):
-            buttons[player.name + '_' + msg] = \
-                Button(bstats_settings, screen, msg, index, i, offset)
-
-    return buttons
-
-def update_screen(stats, bstats_settings, screen, button,\
-    buttons, playerdict, sb, pstats, teams):
+def update_screen(stats, bstats_settings, screen, button,
+                  buttons, playerdict, sb, pstats, teams):
     """Update images on the screen and flip to the new screen."""
 
     # Redraw the screen during each pass through the loop.
@@ -189,8 +209,6 @@ def update_screen(stats, bstats_settings, screen, button,\
     # Draw the stats buttons for players
     for key, value in buttons.items():
         value.draw_button()
-
-
 
     # Make lines
 #    bstats_lines.drawHouse(0, bstats_settings.screen_height,\

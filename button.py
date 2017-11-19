@@ -19,12 +19,15 @@ class Button():
         # Set the dimensions and properties of the button.
         if len(msg) <= 2:
             self.width, self.height = (3 * 15), 36
+            # self.width, self.height = (3 * 12), 30
         else:
             self.width, self.height = len(msg * 15), 36
+           # self.width, self.height = len(msg * 12), 30
 
         self.button_color = bstats_settings.colorPlay
         self.text_color = bstats_settings.colorText
         self.font = pygame.font.SysFont('FreeMono', 24, bold=True)
+        # self.font = pygame.font.SysFont('FreeMono', 18, bold=True)
 
         # Build the button's rect object and center it.
         self.rect = pygame.Rect(0, 0, self.width, self.height)
@@ -38,18 +41,22 @@ class Button():
         elif index is 0:
             if offset is 0:
                 self.button_color = bstats_settings.colorHome
+                self.text_color = bstats_settings.colorHome2
             else:
                 self.button_color = bstats_settings.colorAway
+                self.text_color = bstats_settings.colorAway2
             self.rect.midleft = (index + offset, (row + 1) * 40)
 
-        # Is the button Player/Number ? hug the
+        # Is the button stats the button ? add offset
         #    offset (currently mid of screen)
         # Inner if-else for team color
         else:
             if offset is 0:
                 self.button_color = bstats_settings.colorHome
+                self.text_color = bstats_settings.colorHome2
             else:
                 self.button_color = bstats_settings.colorAway
+                self.text_color = bstats_settings.colorAway2
             self.rect.midleft = (
                 index * (self.width + 10) + 90 + offset,
                 (row + 1) * 40

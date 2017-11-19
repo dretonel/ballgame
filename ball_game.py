@@ -1,8 +1,6 @@
 import pygame
-# import players
 import functions as func
 import csv_func
-# import bstats_lines
 from settings import Settings
 from button import Button
 from score_stats import ScoreStats
@@ -32,11 +30,13 @@ def run_game():
     # Open Player List CSV, and get players from file in a dictionary
     playerdict = csv_func.read_playersCSV(bstats_settings)
 
+    # List of team objects
     teams = [
         Team(bstats_settings, 'A', -1, 'Home'),
         Team(bstats_settings, 'B', -2, 'Away')
     ]
 
+    # Populate teamlist of team object with correct player
     for team in teams:
         for player in playerdict.values():
             if player.team == team.team:
@@ -45,10 +45,10 @@ def run_game():
     # bstats_settings.get_playerdict(playerdict)
 
     # Make the stats buttons for players and put it in a dictionary, buttons
-    buttons = func.make_stats_buttons(bstats_settings, playerdict, screen)
+    buttons = func.make_stats_buttons(bstats_settings, teams, screen)
 
     # Create player stats class object
-    pstats = Playerstats(bstats_settings, screen, playerdict)
+    pstats = Playerstats(bstats_settings, screen, teams)
 
     # Make a player
     # player = players.Player('Lorelei', 5)
@@ -56,26 +56,11 @@ def run_game():
     # Start the main loop for the game.
     while True:
 
-        func.check_events(
-            stats,
-            buttons,
-            playerdict,
-            play_button,
-            bstats_settings,
-            teams
-        )
+        func.check_events(stats, buttons, playerdict, play_button,
+                          bstats_settings, teams)
 
-        func.update_screen(
-            stats,
-            bstats_settings,
-            screen,
-            play_button,
-            buttons,
-            playerdict,
-            sb,
-            pstats,
-            teams
-        )
+        func.update_screen(stats, bstats_settings, screen, play_button,
+                           buttons, playerdict, sb, pstats, teams)
 
 
 run_game()
