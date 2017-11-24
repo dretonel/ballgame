@@ -22,7 +22,7 @@ class Button():
             # self.width, self.height = (3 * 12), 30
         else:
             self.width, self.height = len(msg * 15), 36
-           # self.width, self.height = len(msg * 12), 30
+            # self.width, self.height = len(msg * 12), 30
 
         self.button_color = bstats_settings.colorPlay
         self.text_color = bstats_settings.colorText

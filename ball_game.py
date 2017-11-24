@@ -6,7 +6,7 @@ from button import Button
 from score_stats import ScoreStats
 from scoreboard import Scoreboard
 from playerstats import Playerstats
-from teams import Team
+# from teams import Team
 
 
 def run_game():
@@ -27,14 +27,16 @@ def run_game():
     # Make the play button
     play_button = Button(bstats_settings, screen, "Play")
 
+    playerdict = {}
+    teams = []
     # Open Player List CSV, and get players from file in a dictionary
-    playerdict = csv_func.read_playersCSV(bstats_settings)
+    csv_func.read_playersCSV(bstats_settings, playerdict, teams)
 
     # List of team objects
-    teams = [
-        Team(bstats_settings, 'A', -1, 'Home'),
-        Team(bstats_settings, 'B', -2, 'Away')
-    ]
+#    teams = [
+#        Team(bstats_settings, 'A', -1, 'Home'),
+#        Team(bstats_settings, 'B', -2, 'Away')
+#    ]
 
     # Populate teamlist of team object with correct player
     for team in teams:

@@ -142,7 +142,7 @@ def make_stats_buttons(bstats_settings, teams, screen):
 
     for team in teams:
         for player in sorted(team.teamlist, key=lambda player: player.name):
-            if player.team =='Away':
+            if player.team == 'Away':
                 offset = bstats_settings.screen_width / 2
                 awaycount += 1
                 i = awaycount
@@ -158,6 +158,23 @@ def make_stats_buttons(bstats_settings, teams, screen):
     return buttons
 
 
+def team_results(teams):
+    """Fill the proper value of win/loss """
+
+    team1Pts = 0
+
+    for i, team in enumerate(teams):
+        if i == 0:
+            team1Pts = team.pts
+            continue
+        if team1Pts > team.pts:
+            teams[i-1].win = 1
+            team.loss = 1
+        else:
+            team.win = 1
+            teams[i-1].loss = 1
+
+
 def check_events(stats, buttons, playerdict, play_button, bstats_settings,
                  teams):
     """Respond to keypresses and mouse events."""
@@ -165,6 +182,8 @@ def check_events(stats, buttons, playerdict, play_button, bstats_settings,
 
         # Event is Quit ? write CSV then close program
         if event.type == pygame.QUIT:
+            team_results(teams)
+            print(teams[0].win)
             csv_func.write_CSV(bstats_settings, teams)
             sys.exit()
         elif event.type == pygame.KEYDOWN:

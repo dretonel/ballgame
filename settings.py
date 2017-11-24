@@ -1,5 +1,5 @@
 # settings.py - settings for Basketball Scoring
-from decimal import getcontext, Decimal
+from decimal import getcontext
 
 
 getcontext().prec = 3
