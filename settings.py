@@ -70,18 +70,21 @@ class Settings():
         """Define the original colors"""
 
         # Colors used
-#        self.colorHome = (255, 0, 0)            # Home is Red
-#        self.colorAway = (0, 0, 255)            # Away is Blue
-#        self.colorHome = (0, 153, 0)            # Home is Green
-#        self.colorAway = (255, 0, 0)            # Away is Red
+#        self.colorHome = (255, 0, 0)               # Home is Red
+#        self.colorAway = (0, 0, 255)               # Away is Blue
+        self.colorHome = (0, 153, 0)                # Home is Green
 #        self.colorHome = (111, 38, 61)              # Home is Maroon
 #        self.colorHome2 = (255, 184, 28)            # Home 2nd is Gold
-        self.colorHome = (0, 119, 139)              # Home is Teal
+#        self.colorHome = (0, 119, 139)              # Home is Teal
         #self.colorHome2 = (32, 23, 71)              # Home 2nd is Dark Purp
         self.colorHome2 = (255, 255, 255)           # Home 2nd is White
 
-        self.colorAway = (112, 47, 138)             # Away is Purple
-        self.colorAway2 = (255, 199, 44)            # Away 2nd is Yellow
+#        self.colorAway = (112, 47, 138)             # Away is Purple
+#        self.colorAway2 = (255, 199, 44)            # Away 2nd is Yellow
+#        self.colorAway = (255, 0, 0)                # Away is Red
+#        self.colorAway2 = (255, 255, 255)           # Home 2nd is White
+        self.colorAway = (36, 62, 144)              # Away is Royal Blue
+        self.colorAway2 = (255, 205, 52)            # Away 2nd is Gold Yel
 
         self.colorPlay = (255, 106, 0)              # Play is Orange
         self.colorText = (255, 255, 255)            # Text is White

@@ -3,15 +3,8 @@ import pygame
 
 class Button():
 
-    def __init__(
-        self,
-        bstats_settings,
-        screen,
-        msg,
-        index=0,
-        row=0,
-        offset=0
-    ):
+    def __init__(self, bstats_settings, screen, msg,
+                 index=0, row=0, offset=0):
         """Initialize the button attributes."""
         self.screen = screen
         self.screen_rect = screen.get_rect()

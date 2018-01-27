@@ -32,7 +32,8 @@ def check_play_button(stats, play_button, mouse_x, mouse_y):
         stats.game_active = True
 
 
-def check_player_buttons(stats, buttons, playerdict, mouse_x, mouse_y):
+def check_player_buttons(stats, buttons, playerdict, teams,
+                         runScore, mouse_x, mouse_y):
     """Check fg button presses and add stat to player."""
     if stats.game_active:
         for key, button in buttons.items():
@@ -42,6 +43,7 @@ def check_player_buttons(stats, buttons, playerdict, mouse_x, mouse_y):
                 for person in playerdict.values():
                     if re.match(person.name, key) and button_clicked:
                         person.fg_made(stats.edit_flag)
+                        runScore.update_rs(person, stats.edit_flag)
                         stats.stat_change = True
                         break
 
@@ -56,6 +58,7 @@ def check_player_buttons(stats, buttons, playerdict, mouse_x, mouse_y):
                 for person in playerdict.values():
                     if re.match(person.name, key) and button_clicked:
                         person.threeP_made(stats.edit_flag)
+                        runScore.update_rs(person, stats.edit_flag)
                         stats.stat_change = True
                         break
 
@@ -70,6 +73,7 @@ def check_player_buttons(stats, buttons, playerdict, mouse_x, mouse_y):
                 for person in playerdict.values():
                     if re.match(person.name, key) and button_clicked:
                         person.ft_made(stats.edit_flag)
+                        runScore.update_rs(person, stats_edit_flag)
                         stats.stat_change = True
                         break
 
@@ -146,7 +150,7 @@ def make_stats_buttons(bstats_settings, teams, screen):
                 offset = bstats_settings.screen_width / 2
                 awaycount += 1
                 i = awaycount
-            elif team.team == 'Home':
+            elif player.team == 'Home':
                 offset = 0
                 homecount += 1
                 i = homecount
@@ -176,15 +180,16 @@ def team_results(teams):
 
 
 def check_events(stats, buttons, playerdict, play_button, bstats_settings,
-                 teams):
+                 teams, runScore):
     """Respond to keypresses and mouse events."""
     for event in pygame.event.get():
 
         # Event is Quit ? write CSV then close program
         if event.type == pygame.QUIT:
             team_results(teams)
-            print(teams[0].win)
-            csv_func.write_CSV(bstats_settings, teams)
+            #runScore.clean_rs()
+            csv_func.write_CSV(bstats_settings, teams, runScore)
+            #print(runScore.rScore)
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             check_keydown_events(event, stats)
@@ -193,12 +198,12 @@ def check_events(stats, buttons, playerdict, play_button, bstats_settings,
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
             check_play_button(stats, play_button, mouse_x, mouse_y)
-            check_player_buttons(stats, buttons, playerdict,
-                                 mouse_x, mouse_y)
+            check_player_buttons(stats, buttons, playerdict, teams,
+                                 runScore, mouse_x, mouse_y)
 
 
 def update_screen(stats, bstats_settings, screen, button,
-                  buttons, playerdict, sb, pstats, teams):
+                  buttons, playerdict, sb, pstats, teams, runScore):
     """Update images on the screen and flip to the new screen."""
 
     # Redraw the screen during each pass through the loop.
@@ -220,6 +225,8 @@ def update_screen(stats, bstats_settings, screen, button,
     # pstats.prep_stats_header()
     # pstats.show_stats()
     pstats.prep_stats()
+
+    runScore.prep_rs()
 
     # Edit Mode ? Show Edit Mode String
     if stats.edit_flag:

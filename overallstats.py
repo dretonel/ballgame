@@ -4,7 +4,7 @@
 # Reads all output*.csv files in current directory,
 # Sums together all player stats, each player added to dictionary
 # Prints out to .csv file the summation of all stats
-# IMPORTANT: Major changes need if summation of FT and FTA
+# IMPORTANT: Major changes needed if summation of FT and FTA
 
 import os
 import csv
@@ -21,7 +21,9 @@ writeFile = open('OverallStats.csv', 'w', newline='\n')
 csvWriter = csv.writer(writeFile)
 
 # Read output*.csv files in current directory
-rName = 'output'
+rName = 'output'                    # name of output file
+numfiles = 0                        # number of last file summed
+
 for i in range(1, 25):
     readFName = rName + str(i) + '.csv'
 
@@ -45,9 +47,13 @@ for i in range(1, 25):
             if len(item) == 0:
                 continue
 
+            # Running Score ? Do not include and break
+            if item[0] == 'Running Score':
+                break
+
             # New Player ? add to dictionary, sum stats
             if item[0] not in playerdict:
-                if '' in item[0]:
+                if '' in item:
                     playerdict[item[0]] = teams.Team(bstats_settings,
                                                      item[0], index)
                     playerdict[item[0]].win = int(item[-2])
@@ -74,7 +80,7 @@ for i in range(1, 25):
                 playerdict[item[0]].update_fg()
 
             else:
-                if '' in item[0]:
+                if '' in item:
                     playerdict[item[0]].win += int(item[-2])
                     playerdict[item[0]].loss += int(item[-1])
 
@@ -95,6 +101,10 @@ for i in range(1, 25):
                 playerdict[item[0]].tov += int(item[15])
                 playerdict[item[0]].pf += int(item[16])
                 playerdict[item[0]].update_fg()
+
+        # Close this file when finished taking data
+        readFile.close()
+        numfiles = i
     else:
         break
 
@@ -107,5 +117,6 @@ for player in playerdict.values():
     csvWriter.writerow(statline)
 
 # Close Read and Write Files
-readFile.close()
 writeFile.close()
+
+print("Output files up to " + rName + str(i - 1) + ".csv read \n")

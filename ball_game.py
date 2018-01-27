@@ -6,6 +6,7 @@ from button import Button
 from score_stats import ScoreStats
 from scoreboard import Scoreboard
 from playerstats import Playerstats
+from running_score import RunningScore
 # from teams import Team
 
 
@@ -52,6 +53,9 @@ def run_game():
     # Create player stats class object
     pstats = Playerstats(bstats_settings, screen, teams)
 
+    # Create a running score class object
+    runScore = RunningScore(bstats_settings, screen, teams)
+
     # Make a player
     # player = players.Player('Lorelei', 5)
 
@@ -59,10 +63,10 @@ def run_game():
     while True:
 
         func.check_events(stats, buttons, playerdict, play_button,
-                          bstats_settings, teams)
+                          bstats_settings, teams, runScore)
 
         func.update_screen(stats, bstats_settings, screen, play_button,
-                           buttons, playerdict, sb, pstats, teams)
+                           buttons, playerdict, sb, pstats, teams, runScore)
 
 
 run_game()

@@ -43,8 +43,10 @@ class ScoreStats():
     #    self.bstats_settings.colorHome = (255, 128, 128)
     #    self.bstats_settings.colorAway = (128, 128, 255)
         self.bstats_settings.colorText = (255, 255, 0)
-        # self.bstats_settings.colorHome = (38, 154, 38)
+        self.bstats_settings.colorHome = (38, 154, 38)
         # self.bstats_settings.colorAway = (255, 128, 128)
-        self.bstats_settings.colorHome = (113, 56, 74)      # Cavs color
-        self.bstats_settings.colorHome = (48, 168, 192)     # Hornets color
-        self.bstats_settings.colorAway = (120, 69, 138)     # Lakers color
+        #self.bstats_settings.colorHome = (113, 56, 74)      # Cavs color
+        #self.bstats_settings.colorHome = (48, 168, 192)     # Hornets color
+#        self.bstats_settings.colorAway = (120, 69, 138)     # Lakers color
+#        self.bstats_settings.colorAway = (255, 128, 128)    # Rocket Red color
+        self.bstats_settings.colorAway = (72, 88, 143)     # Warriors color

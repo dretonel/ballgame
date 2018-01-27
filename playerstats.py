@@ -1,6 +1,6 @@
 # playerstats.py - Ball Stats Module to display player stats on Pygame screen
 # Author:        Dan Retonel
-# Date:            29 Sept 2017
+# Date:          29 Sept 2017
 # Contains Playerstats() Class that controls, preps, and draws the player
 # stats on the pygame screen.
 

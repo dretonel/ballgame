@@ -19,7 +19,7 @@ def read_playersCSV(bstats_settings, playerdict, teams):
 
 
 # Write to stats to CSV File and close the file
-def write_CSV(bstats_settings, teams):
+def write_CSV(bstats_settings, teams, runScore):
     fName = 'output'
     filename = fName + '.csv'
 
@@ -44,6 +44,14 @@ def write_CSV(bstats_settings, teams):
     for team in teams:
         csvWriter.writerow(bstats_settings.get_playerdict(team) +
                            ['', team.win, team.loss])
+
+    for counter in range(4):
+        csvWriter.writerow([])
+
+    csvWriter.writerow(['Running Score'])
+
+    for rlist in runScore.rsLists:
+        csvWriter.writerow(rlist)
 
     # Close the file
     csvOutfile.close()
