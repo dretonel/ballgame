@@ -1,4 +1,8 @@
-# teamstats.py
+# teamstats.py - Team Class which inherits from Player Class
+# Author:       Dan Retonel
+# Date:         20 Nov 2017
+# Class for teams which includes a list of all players on that team,
+# and a win and a loss integer value. 
 
 from players import Player
 
@@ -43,8 +47,8 @@ class Team(Player):
 
             self.pf += player.pf
 
-#                    self.().format(pattr) += pvalue
-#            self.pts += player.pts
+#           self.().format(pattr) += pvalue
+#           self.pts += player.pts
 
     def __reset_stats(self):
         """Zero all team stats"""

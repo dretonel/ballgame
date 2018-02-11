@@ -1,6 +1,16 @@
+#! /home/dan/anaconda3/bin/python3
+# ball_game.py - Ball Game Stats Using Pygame
+# Author:       Dan Retonel
+# Date:         20 Sept 2017
+# This file contains the script to run the Ball Game Stats.
+# It initializes all necessary settings and objects that are
+# used.
+# To start the program, simply type:
+#   $ python3 ball_game.py
+
 import pygame
 import functions as func
-import csv_func
+import csvfunc
 from settings import Settings
 from button import Button
 from score_stats import ScoreStats
@@ -31,7 +41,7 @@ def run_game():
     playerdict = {}
     teams = []
     # Open Player List CSV, and get players from file in a dictionary
-    csv_func.read_playersCSV(bstats_settings, playerdict, teams)
+    csvfunc.read_playersCSV(bstats_settings, playerdict, teams)
 
     # List of team objects
 #    teams = [

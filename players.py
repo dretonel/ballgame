@@ -1,4 +1,4 @@
-# player.py - Basketball Player Class
+# player.py - Basketball Player Class which inherits from Stats Class
 # Author:       Dan Retonel
 # Date:        15 Sept 2017
 

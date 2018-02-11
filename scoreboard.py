@@ -1,3 +1,15 @@
+# scorboard.py - Scoreboard Class that reports the team scores
+# Author:       Dan Retonel
+# Date:         6 Oct 2017
+# A class that handles the displaying the score for each team.
+# It works in tandem with pygame to display the score (the total
+# number of points of each team) at the top of the screen.
+# The module aims to do the following:
+#
+#               (top of screen)
+# -------------------------------------------------
+# |     Home: X                 Away: Y           |
+
 import pygame.font
 
 

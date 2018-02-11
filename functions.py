@@ -1,9 +1,12 @@
+# functions.py - the functions called in Ball Game Stats
+# Author:       Dan Retonel
+# Date:         20 Sept 2017
+# Contains all the functions that run within the Ball Game Stats
+
 import sys
 import re
 import pygame
-
-import csv_func
-# import bstats_lines
+import csvfunc
 from button import Button
 
 
@@ -188,7 +191,7 @@ def check_events(stats, buttons, playerdict, play_button, bstats_settings,
         if event.type == pygame.QUIT:
             team_results(teams)
             #runScore.clean_rs()
-            csv_func.write_CSV(bstats_settings, teams, runScore)
+            csvfunc.write_CSV(bstats_settings, teams, runScore)
             #print(runScore.rScore)
             sys.exit()
         elif event.type == pygame.KEYDOWN:

@@ -1,3 +1,11 @@
+# button.py - Button Class Module for Ball Stats
+# Author:           Dan Retonel
+# Date Created:     20 Sept 2017
+# Button class to build buttons for stats input and other pygame
+# functions. Each button object initializes with it's location
+# relative to the screen
+# Last Mod Date:    1 Feb 2018
+
 import pygame
 
 
@@ -17,6 +25,7 @@ class Button():
             self.width, self.height = len(msg * 15), 36
             # self.width, self.height = len(msg * 12), 30
 
+        # Set the button color and font attributes
         self.button_color = bstats_settings.colorPlay
         self.text_color = bstats_settings.colorText
         self.font = pygame.font.SysFont('FreeMono', 24, bold=True)
