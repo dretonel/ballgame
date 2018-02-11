@@ -11,9 +11,9 @@
 import pygame
 import functions as func
 import csvfunc
+from scorestats import ScoreStats
 from settings import Settings
 from button import Button
-from score_stats import ScoreStats
 from scoreboard import Scoreboard
 from playerstats import Playerstats
 from running_score import RunningScore

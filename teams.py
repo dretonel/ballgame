@@ -2,7 +2,7 @@
 # Author:       Dan Retonel
 # Date:         20 Nov 2017
 # Class for teams which includes a list of all players on that team,
-# and a win and a loss integer value. 
+# and a win and a loss integer value.
 
 from players import Player
 

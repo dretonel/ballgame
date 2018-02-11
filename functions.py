@@ -23,9 +23,9 @@ def check_keydown_events(event, stats):
 def check_keyup_events(event, stats):
     """Respond to key releases"""
     # if event.key == pygame.K_RIGHT:
-        # false something1
+    #     false something1
     # elif event.key == pygame.K_LEFT:
-        # false something2
+    #     false something2
 
 
 def check_play_button(stats, play_button, mouse_x, mouse_y):
@@ -76,7 +76,7 @@ def check_player_buttons(stats, buttons, playerdict, teams,
                 for person in playerdict.values():
                     if re.match(person.name, key) and button_clicked:
                         person.ft_made(stats.edit_flag)
-                        runScore.update_rs(person, stats_edit_flag)
+                        runScore.update_rs(person, stats.edit_flag)
                         stats.stat_change = True
                         break
 
@@ -190,9 +190,7 @@ def check_events(stats, buttons, playerdict, play_button, bstats_settings,
         # Event is Quit ? write CSV then close program
         if event.type == pygame.QUIT:
             team_results(teams)
-            #runScore.clean_rs()
             csvfunc.write_CSV(bstats_settings, teams, runScore)
-            #print(runScore.rScore)
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             check_keydown_events(event, stats)

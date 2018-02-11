@@ -2,7 +2,7 @@
 # Author:       Dan Retonel
 # Date:         7 Oct 2017
 # This module contains funcions to read from and write to .csv files
-# for the operation of Ball Game Stats. 
+# for the operation of Ball Game Stats.
 
 import os
 import csv
@@ -83,5 +83,5 @@ def write_CSV(bstats_settings, teams, runScore):
     # Close the file
     csvOutfile.close()
 
-    # Prompt to terminal the name of the .csv file written 
+    # Prompt to terminal the name of the .csv file written
     print('The stats were written in:\t' + filename)

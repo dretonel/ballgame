@@ -35,8 +35,8 @@ class Settings():
             '3Pts',
             '3PtAtt',
             '3Pt%',
-#            'FTM',              # Free-throws made
-#            'FTAtt',            # Free-throws attempted
+            # 'FTM',              # Free-throws made
+            # 'FTAtt',            # Free-throws attempted
             'Assists',
             '0-Rebs',
             'D-Rebs',
@@ -76,7 +76,7 @@ class Settings():
 #        self.colorHome = (111, 38, 61)              # Home is Maroon
 #        self.colorHome2 = (255, 184, 28)            # Home 2nd is Gold
 #        self.colorHome = (0, 119, 139)              # Home is Teal
-        #self.colorHome2 = (32, 23, 71)              # Home 2nd is Dark Purp
+        # self.colorHome2 = (32, 23, 71)              # Home 2nd is Dark Purp
         self.colorHome2 = (255, 255, 255)           # Home 2nd is White
 
 #        self.colorAway = (112, 47, 138)             # Away is Purple
@@ -102,8 +102,8 @@ class Settings():
             "{:.{prec}f}".format(player.fgp, prec=self.rounding),
             player.threeP, player.threePa,
             "{:.{prec}f}".format(player.threePp, prec=self.rounding),
-#            player.ft,          # Free-throws made
-#            player.fta,         # Free-throws attempted
+            # player.ft,          # Free-throws made
+            # player.fta,         # Free-throws attempted
             player.ast,
             player.orb,
             player.drb,
