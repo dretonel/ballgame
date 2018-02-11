@@ -45,97 +45,97 @@ def check_player_buttons(stats, buttons, playerdict, teams,
             if "_fg" in key and "_fga" not in key:
                 for person in playerdict.values():
                     if re.match(person.name, key) and button_clicked:
-                        person.fg_made(stats.edit_flag)
-                        runScore.update_rs(person, stats.edit_flag)
-                        stats.stat_change = True
+                        person.fg_made(stats.editFlag)
+                        runScore.update_rs(person, stats.editFlag)
+                        stats.statChange = True
                         break
 
             if "_fga" in key:
                 for person in playerdict.values():
                     if re.match(person.name, key) and button_clicked:
-                        person.fg_att(stats.edit_flag)
-                        stats.stat_change = True
+                        person.fg_att(stats.editFlag)
+                        stats.statChange = True
                         break
 
             if "_3pt" in key:
                 for person in playerdict.values():
                     if re.match(person.name, key) and button_clicked:
-                        person.threeP_made(stats.edit_flag)
-                        runScore.update_rs(person, stats.edit_flag)
-                        stats.stat_change = True
+                        person.threeP_made(stats.editFlag)
+                        runScore.update_rs(person, stats.editFlag)
+                        stats.statChange = True
                         break
 
             if '_3pa' in key:
                 for person in playerdict.values():
                     if re.match(person.name, key) and button_clicked:
-                        person.threeP_att(stats.edit_flag)
-                        stats.stat_change = True
+                        person.threeP_att(stats.editFlag)
+                        stats.statChange = True
                         break
 
             if '_ft' in key and "fta" not in key:
                 for person in playerdict.values():
                     if re.match(person.name, key) and button_clicked:
-                        person.ft_made(stats.edit_flag)
-                        runScore.update_rs(person, stats.edit_flag)
-                        stats.stat_change = True
+                        person.ft_made(stats.editFlag)
+                        runScore.update_rs(person, stats.editFlag)
+                        stats.statChange = True
                         break
 
             if '_fta' in key:
                 for person in playerdict.values():
                     if re.match(person.name, key) and button_clicked:
-                        person.fta += 1 - (2 * int(stats.edit_flag))
-                        stats.stat_change = True
+                        person.fta += 1 - (2 * int(stats.editFlag))
+                        stats.statChange = True
                         break
 
             if "_ast" in key:
                 for person in playerdict.values():
                     if re.match(person.name, key) and button_clicked:
-                        person.ast += 1 - (2 * int(stats.edit_flag))
-                        stats.stat_change = True
+                        person.ast += 1 - (2 * int(stats.editFlag))
+                        stats.statChange = True
                         break
 
             if "_orb" in key:
                 for person in playerdict.values():
                     if re.match(person.name, key) and button_clicked:
-                        person.orb += 1 - (2 * int(stats.edit_flag))
+                        person.orb += 1 - (2 * int(stats.editFlag))
                         person.update_rb()
-                        stats.stat_change = True
+                        stats.statChange = True
                         break
 
             if "_drb" in key:
                 for person in playerdict.values():
                     if re.match(person.name, key) and button_clicked:
-                        person.drb += 1 - (2 * int(stats.edit_flag))
+                        person.drb += 1 - (2 * int(stats.editFlag))
                         person.update_rb()
-                        stats.stat_change = True
+                        stats.statChange = True
                         break
 
             if "_stl" in key:
                 for person in playerdict.values():
                     if re.match(person.name, key) and button_clicked:
-                        person.stl += 1 - (2 * int(stats.edit_flag))
-                        stats.stat_change = True
+                        person.stl += 1 - (2 * int(stats.editFlag))
+                        stats.statChange = True
                         break
 
             if "_blk" in key:
                 for person in playerdict.values():
                     if re.match(person.name, key) and button_clicked:
-                        person.blk += 1 - (2 * int(stats.edit_flag))
-                        stats.stat_change = True
+                        person.blk += 1 - (2 * int(stats.editFlag))
+                        stats.statChange = True
                         break
 
             if "_tov" in key:
                 for person in playerdict.values():
                     if re.match(person.name, key) and button_clicked:
-                        person.tov += 1 - (2 * int(stats.edit_flag))
-                        stats.stat_change = True
+                        person.tov += 1 - (2 * int(stats.editFlag))
+                        stats.statChange = True
                         break
 
             if "_pf" in key:
                 for person in playerdict.values():
                     if re.match(person.name, key) and button_clicked:
-                        person.pf += 1 - (2 * int(stats.edit_flag))
-                        stats.stat_change = True
+                        person.pf += 1 - (2 * int(stats.editFlag))
+                        stats.statChange = True
                         break
 
 
@@ -210,10 +210,10 @@ def update_screen(stats, bstats_settings, screen, button,
     # Redraw the screen during each pass through the loop.
     screen.fill(bstats_settings.bg_color)
 
-    if stats.stat_change:
+    if stats.statChange:
         for team in teams:
             team.update_stats()
-        stats.stat_change = False
+        stats.statChange = False
 
     # Update the score
     stats.update_score(teams)
@@ -230,7 +230,7 @@ def update_screen(stats, bstats_settings, screen, button,
     runScore.prep_rs()
 
     # Edit Mode ? Show Edit Mode String
-    if stats.edit_flag:
+    if stats.editFlag:
         pstats.prep_editmode_str()
 
     # Draw the stats buttons for players

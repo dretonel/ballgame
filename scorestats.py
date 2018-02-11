@@ -12,8 +12,8 @@ class ScoreStats():
     def __init__(self, bstats_settings):
         """Initialize statistics."""
         self.bstats_settings = bstats_settings
-        self.edit_flag = False
-        self.stat_change = False
+        self.editFlag = False
+        self.statChange = False
 
         self.reset_stats()
 
@@ -36,9 +36,9 @@ class ScoreStats():
 
     def edit_stats(self):
         """Toggle edit stat flag"""
-        self.edit_flag = not self.edit_flag
+        self.editFlag = not self.editFlag
 
-        if self.edit_flag:
+        if self.editFlag:
             self.__edit_mode()
         else:
             self.bstats_settings.orig_colors()

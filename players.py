@@ -49,38 +49,38 @@ class Player(Stats):
             "."
         )
 
-    def fg_made(self, edit_flag):
+    def fg_made(self, editFlag):
         """Change stats on a field goal made"""
-        self.fg += 1 - (2 * int(edit_flag))
-        self.fga += 1 - (2 * int(edit_flag))
+        self.fg += 1 - (2 * int(editFlag))
+        self.fga += 1 - (2 * int(editFlag))
 
         # Field goals are worth value set in settings
-        self.pts += self.bstats_settings.fg * (1 - (2 * int(edit_flag)))
+        self.pts += self.bstats_settings.fg * (1 - (2 * int(editFlag)))
 
         self.update_fg()
 
-    def fg_att(self, edit_flag):
+    def fg_att(self, editFlag):
         """Change stats on a field goal attempted"""
-        self.fga += 1 - (2 * int(edit_flag))
+        self.fga += 1 - (2 * int(editFlag))
         self.update_fg()
 
-    def threeP_made(self, edit_flag):
+    def threeP_made(self, editFlag):
         """Change stats on 3-ptr made"""
-        self.threeP += 1 - (2 * int(edit_flag))
-        self.threePa += 1 - (2 * int(edit_flag))
-        self.fg += 1 - (2 * int(edit_flag))
-        self.fga += 1 - (2 * int(edit_flag))
+        self.threeP += 1 - (2 * int(editFlag))
+        self.threePa += 1 - (2 * int(editFlag))
+        self.fg += 1 - (2 * int(editFlag))
+        self.fga += 1 - (2 * int(editFlag))
 
         # 3s are worth value set in settings
         self.pts += self.bstats_settings.threefg * \
-            (1 - (2 * int(edit_flag)))
+            (1 - (2 * int(editFlag)))
 
         self.update_fg()
 
-    def threeP_att(self, edit_flag):
+    def threeP_att(self, editFlag):
         """Change stats on 3-ptr attempted"""
-        self.threePa += 1 - (2 * int(edit_flag))
-        self.fga += 1 - (2 * int(edit_flag))
+        self.threePa += 1 - (2 * int(editFlag))
+        self.fga += 1 - (2 * int(editFlag))
         self.update_fg()
 
     def update_fg(self):
@@ -95,12 +95,12 @@ class Player(Stats):
         else:
             self.threePp = 0.000
 
-    def ft_made(self, edit_flag):
+    def ft_made(self, editFlag):
         """Change stats on a ft made"""
-        self.ft += 1 - (2 * int(edit_flag))
-        self.fta += 1 - (2 * int(edit_flag))
+        self.ft += 1 - (2 * int(editFlag))
+        self.fta += 1 - (2 * int(editFlag))
 
-        self.pts += 1 - (2 * int(edit_flag))
+        self.pts += 1 - (2 * int(editFlag))
 
     def update_rb(self):
         """Update the total rebound stat"""
